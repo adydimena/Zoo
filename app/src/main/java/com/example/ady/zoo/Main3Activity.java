@@ -18,7 +18,7 @@ public class Main3Activity extends AppCompatActivity {
 
     private boolean isinsert;
     private DataBaseHelper database;
-    private TextView tvtrying;
+
 
 
     @Override
@@ -33,16 +33,16 @@ public class Main3Activity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null)
         keytodisplay = bundle.getString("magic");
-        tvtrying = findViewById(R.id.trying);
-        tvtrying.setText(" ");
-        tvtrying.setText(keytodisplay);
+
+
+
         populatedatabase ();
         List<String> CategoriesClicked = new ArrayList<>();
-        RecyclerView recyclerView = findViewById(R.id.rvdisplay);
+
 
         Cursor result = database.getallgata(keytodisplay);
         if (result.getCount() == 0){
-            tvtrying.setText("Data Base Failed");
+
             return;
         }
         while(result.moveToNext()){
@@ -51,10 +51,15 @@ public class Main3Activity extends AppCompatActivity {
             //tvtrying.append("\n");
         }
 
+        RecyclerView recyclerView = findViewById(R.id.recycleMainAcitivity);
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(this);
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         Recycleadapter recycleadapter = new Recycleadapter(CategoriesClicked);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(itemAnimator);
+        recyclerView.setAdapter(recycleadapter);
+
 
 
 
